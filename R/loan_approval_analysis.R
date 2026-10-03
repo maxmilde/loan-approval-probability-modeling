@@ -147,6 +147,9 @@ data_est$loan_purpose  <- relevel(data_est$loan_purpose, ref="1")
 
 
 
+data_est$log_income <- log(data_est$income)
+data_est$log_loan_amount <- log(data_est$loan_amount)
+
 cont_mat <- data_est %>% transmute( 
     log_income = log_income,
     log_loan = log_loan_amount,
@@ -166,7 +169,7 @@ Z <- model.matrix(~ income + loan_amount + loan_to_value_ratio +  #so we get a n
                     tract_to_msa_income_percentage + ffiec_msa_md_median_family_income +
                     race_clean + ethnicity_clean,
                     data=data_est)
-Z <- as.data.frame(X)
+Z <- as.data.frame(Z)
 summary_stats <- data.frame(obs=sapply(Z, function(x) sum(!is.na(x))),
                             mean=round(sapply(Z, function(x) mean(x, na.rm = TRUE)), 2),
                             sd=round(sapply(Z, function(x) sd(x, na.rm = TRUE)), 2),
@@ -225,8 +228,6 @@ hist(data_est$income, breaks=10000, xlim=c(0, quantile(data_est$income, 0.99)), 
 
 
 # 3) Model Estimation ----------------------------------------------------------
-data_est$log_income <- log(data_est$income)
-data_est$log_loan_amount <- log(data_est$loan_amount)
 
 #Restricted Logit (w/o ethnicity and race). once DTI is included log(income) coeff. becomes negative
 m0_logit <- glm(approved ~ 
