@@ -3,6 +3,7 @@
 Do mortgage approval probabilities differ across racial and ethnic groups once lenders' underwriting criteria are held fixed? This project estimates that gap on 2024 Home Mortgage Disclosure Act (HMDA) data for New York State, using logit and probit models.
 
 **Paper:** [`paper/mortgage_approval_disparities.pdf`](paper/mortgage_approval_disparities.pdf)
+
 **Authors:** Maxim Milde, Zahid Pashayev (Charles University, 2026)
 
 ## Approach
